@@ -77,6 +77,7 @@ import com.example.data.MealType
 import com.example.ui.components.CalorieHeroCard
 import com.example.ui.components.DateNavigationHeader
 import com.example.ui.components.EditMealDialog
+import com.example.ui.components.CameraPreview
 import com.example.ui.components.GoalSettingsDialog
 import com.example.ui.components.MacrosBreakdownCard
 import com.example.ui.components.ManualEntryDialog
@@ -99,30 +100,16 @@ fun NutriApp(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
 
+    var showCameraPreviewScreen by remember { mutableStateOf(false) }
     var showSnapOptionsDialog by remember { mutableStateOf(false) }
     var showCameraUnavailableDialog by remember { mutableStateOf(false) }
 
-    // Camera Capture Launcher
-    val cameraLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.TakePicturePreview()
-    ) { bitmap: Bitmap? ->
-        if (bitmap != null) {
-            viewModel.analyzeImage(bitmap = bitmap, uri = null)
-        }
-    }
-
-    // Camera Permission Launcher
+    // Camera Permission Launcher for CameraX
     val cameraPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-            try {
-                cameraLauncher.launch(null)
-            } catch (e: ActivityNotFoundException) {
-                showCameraUnavailableDialog = true
-            } catch (e: Exception) {
-                showCameraUnavailableDialog = true
-            }
+            showCameraPreviewScreen = true
         } else {
             showCameraUnavailableDialog = true
         }
@@ -135,13 +122,7 @@ fun NutriApp(
         ) == PackageManager.PERMISSION_GRANTED
 
         if (hasPermission) {
-            try {
-                cameraLauncher.launch(null)
-            } catch (e: ActivityNotFoundException) {
-                showCameraUnavailableDialog = true
-            } catch (e: Exception) {
-                showCameraUnavailableDialog = true
-            }
+            showCameraPreviewScreen = true
         } else {
             try {
                 cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
@@ -158,6 +139,24 @@ fun NutriApp(
         if (uri != null) {
             viewModel.analyzeImage(bitmap = null, uri = uri)
         }
+    }
+
+    // Fullscreen CameraX Live Preview Screen
+    if (showCameraPreviewScreen) {
+        CameraPreview(
+            onPhotoCaptured = { bitmap ->
+                showCameraPreviewScreen = false
+                viewModel.analyzeImage(bitmap = bitmap, uri = null)
+            },
+            onClose = { showCameraPreviewScreen = false },
+            onOpenGallery = {
+                showCameraPreviewScreen = false
+                galleryLauncher.launch(
+                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                )
+            }
+        )
+        return
     }
 
     // Handle snackbar messages

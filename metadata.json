@@ -1,0 +1,6 @@
+{
+  "name": "NutriSnap AI",
+  "description": "AI-powered calorie and macro tracker that recognizes meals from photos and estimates detailed nutrition.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

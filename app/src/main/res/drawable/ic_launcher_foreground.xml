@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Viewfinder Scanner Corners (AI Camera detection) -->
+    <path
+        android:pathData="M32,38 L32,32 L38,32"
+        android:strokeWidth="3.5"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000" />
+    <path
+        android:pathData="M70,32 L76,32 L76,38"
+        android:strokeWidth="3.5"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000" />
+    <path
+        android:pathData="M32,70 L32,76 L38,76"
+        android:strokeWidth="3.5"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000" />
+    <path
+        android:pathData="M76,70 L76,76 L70,76"
+        android:strokeWidth="3.5"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000" />
+
+    <!-- Apple Leaf (Emerald light accent) -->
+    <path
+        android:pathData="M54,34 C58,28 66,28 67,31 C67,36 60,39 54,38 Z"
+        android:fillColor="#C8E6C9" />
+
+    <!-- Apple Body (Health & Nutrition) -->
+    <path
+        android:pathData="M54,44 C50,40 40,40 37,47 C33,56 36,69 46,72 C50,73.5 53,71 54,71 C55,71 58,73.5 62,72 C72,69 75,56 71,47 C68,40 58,40 54,44 Z"
+        android:fillColor="#FFFFFF" />
+
+    <!-- Center AI Nutrition Spark / Flame (Amber Gold) -->
+    <path
+        android:pathData="M54,49 C55.5,53 58,54.5 58,57.5 C58,60 56,62 54,62 C52,62 50,60 50,57.5 C50,55 52.5,53 54,49 Z"
+        android:fillColor="#FFB300" />
+</vector>
